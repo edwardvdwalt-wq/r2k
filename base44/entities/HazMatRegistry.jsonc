@@ -1,0 +1,147 @@
+{
+  "name": "HazMatRegistry",
+  "type": "object",
+  "description": "R2K_Site_Hazmat_Registry \u2014 driver table for tenant visibility and offline sync",
+  "properties": {
+    "tenant_id": {
+      "type": "string",
+      "description": "Internal tenant isolator (maps to Site_Parent)"
+    },
+    "Site_Chem_Id": {
+      "type": "string",
+      "description": "Unique site chemical record ID"
+    },
+    "file_sha256": {
+      "type": "string",
+      "description": "Links to Keys / Hazards / Composition / TextBySection"
+    },
+    "Site_Parent": {
+      "type": "string",
+      "description": "Tenant/company identifier"
+    },
+    "Site": {
+      "type": "string",
+      "description": "Specific site/location name"
+    },
+    "product_name": {
+      "type": "string"
+    },
+    "supplier_name": {
+      "type": "string"
+    },
+    "supplier_product": {
+      "type": "string"
+    },
+    "Top_25_List": {
+      "type": "string"
+    },
+    "Risk_Rating": {
+      "type": "number"
+    },
+    "Risk_Rating_Desc": {
+      "type": "string"
+    },
+    "Likelihood": {
+      "type": "number"
+    },
+    "ERP_Number": {
+      "type": "string"
+    },
+    "Responsible_Department": {
+      "type": "string"
+    },
+    "Onsite_Contractor": {
+      "type": "string"
+    },
+    "Fasttrack_SDS": {
+      "type": "string",
+      "description": "URL to SDS PDF"
+    },
+    "Fasttrack_Img1": {
+      "type": "string",
+      "description": "Site image 1 URL"
+    },
+    "Fasttrack_Img2": {
+      "type": "string",
+      "description": "Site image 2 URL"
+    },
+    "Fasttrack_Vech_Reg": {
+      "type": "string"
+    },
+    "Fasttrack_Supplier_Contact": {
+      "type": "string"
+    },
+    "Site_RA_Doc": {
+      "type": "string",
+      "description": "Risk Assessment doc URL"
+    },
+    "Ra_Doc_Date": {
+      "type": "string",
+      "format": "date"
+    },
+    "pictogram_url": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Active",
+        "Archived",
+        "Pending Review"
+      ],
+      "default": "Active"
+    },
+    "notes": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "file_sha256",
+    "Site_Parent",
+    "Site",
+    "tenant_id"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "data.tenant_id": "{{user.tenant_id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "create": {
+      "$or": [
+        {
+          "data.tenant_id": "{{user.tenant_id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "data.tenant_id": "{{user.tenant_id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

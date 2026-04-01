@@ -1,0 +1,21 @@
+{
+  "name": "PPEReference",
+  "type": "object",
+  "properties": {
+    "ppe_name": {
+      "type": "string",
+      "description": "PPE_Description from SQL"
+    },
+    "image_url": {
+      "type": "string",
+      "description": "Uploaded image URL (converted from base64 during sync)"
+    },
+    "is_deleted": {
+      "type": "boolean",
+      "default": false
+    }
+  },
+  "required": [
+    "ppe_name"
+  ]
+}

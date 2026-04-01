@@ -1,0 +1,104 @@
+{
+  "name": "Composition",
+  "type": "object",
+  "description": "Composition table \u2014 chemical ingredient rows linked by file_sha256",
+  "properties": {
+    "tenant_id": {
+      "type": "string"
+    },
+    "file_sha256": {
+      "type": "string",
+      "description": "Foreign key to Keys/ProductMaster"
+    },
+    "chemical_name": {
+      "type": "string"
+    },
+    "cas_number": {
+      "type": "string"
+    },
+    "ec_number": {
+      "type": "string"
+    },
+    "index_number": {
+      "type": "string"
+    },
+    "reach_registration": {
+      "type": "string"
+    },
+    "conc_value": {
+      "type": "number"
+    },
+    "conc_min": {
+      "type": "number"
+    },
+    "conc_max": {
+      "type": "number"
+    },
+    "conc_unit": {
+      "type": "string",
+      "default": "%"
+    },
+    "hazard_classes": {
+      "type": "string"
+    },
+    "hazard_categories": {
+      "type": "string"
+    },
+    "hazard_statements": {
+      "type": "string"
+    },
+    "m_factor": {
+      "type": "string"
+    },
+    "notes": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "file_sha256",
+    "tenant_id"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "data.tenant_id": "{{user.tenant_id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "create": {
+      "$or": [
+        {
+          "data.tenant_id": "{{user.tenant_id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "data.tenant_id": "{{user.tenant_id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

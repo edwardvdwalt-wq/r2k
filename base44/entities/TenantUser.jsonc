@@ -1,0 +1,70 @@
+{
+  "name": "TenantUser",
+  "type": "object",
+  "description": "Maps users to their tenant(s) and tenant-level role",
+  "properties": {
+    "tenant_id": {
+      "type": "string"
+    },
+    "tenant_name": {
+      "type": "string"
+    },
+    "user_email": {
+      "type": "string"
+    },
+    "tenant_role": {
+      "type": "string",
+      "enum": [
+        "super_admin",
+        "site_admin",
+        "coordinator",
+        "read_only"
+      ],
+      "default": "read_only"
+    },
+    "assigned_site_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Specific sites this user can access. Empty = all sites in tenant."
+    },
+    "is_active": {
+      "type": "boolean",
+      "default": true
+    }
+  },
+  "required": [
+    "tenant_id",
+    "user_email"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "data.user_email": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

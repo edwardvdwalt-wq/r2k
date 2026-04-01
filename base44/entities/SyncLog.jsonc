@@ -1,0 +1,81 @@
+{
+  "name": "SyncLog",
+  "type": "object",
+  "description": "Persistent audit log for relay and sync operations",
+  "properties": {
+    "operation": {
+      "type": "string",
+      "description": "Operation type: relay_endpoint, sync_step",
+      "enum": [
+        "relay_endpoint",
+        "sync_step"
+      ]
+    },
+    "endpoint_or_step": {
+      "type": "string",
+      "description": "Endpoint name (getHazmatList) or sync step (registry, composition, etc)"
+    },
+    "tenant_id": {
+      "type": "string",
+      "description": "Tenant context (null for global lookups)"
+    },
+    "request_params": {
+      "type": "string",
+      "description": "JSON string of request parameters"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "success",
+        "error"
+      ],
+      "default": "success"
+    },
+    "duration_ms": {
+      "type": "number",
+      "description": "Execution time in milliseconds"
+    },
+    "row_count": {
+      "type": "number",
+      "description": "Number of rows returned or affected"
+    },
+    "error_message": {
+      "type": "string",
+      "description": "Error message if status=error"
+    },
+    "error_stack": {
+      "type": "string",
+      "description": "Stack trace if available"
+    },
+    "error_params": {
+      "type": "string",
+      "description": "JSON string of params that caused error"
+    },
+    "offset": {
+      "type": "number",
+      "description": "Pagination offset (sync operations)"
+    },
+    "page_size": {
+      "type": "number",
+      "description": "Pagination page size"
+    },
+    "next_offset": {
+      "type": "number",
+      "description": "Next offset for pagination (sync operations)"
+    },
+    "is_done": {
+      "type": "boolean",
+      "description": "Whether pagination is complete (sync operations)"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Log entry timestamp"
+    }
+  },
+  "required": [
+    "operation",
+    "endpoint_or_step",
+    "status"
+  ]
+}

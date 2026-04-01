@@ -1,0 +1,45 @@
+{
+  "name": "GHSHazardCode",
+  "type": "object",
+  "properties": {
+    "code": {
+      "type": "string"
+    },
+    "statement": {
+      "type": "string",
+      "description": "Comb_Code_Statement from SQL"
+    },
+    "pictogram_img": {
+      "type": "string",
+      "description": "GHS_Haz_Pictogram_IMG URL"
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "H-Statement",
+        "P-Statement",
+        "EUH-Statement"
+      ]
+    },
+    "hazard_class": {
+      "type": "string"
+    },
+    "hazard_category": {
+      "type": "string"
+    },
+    "pictogram_code": {
+      "type": "string"
+    },
+    "signal_word": {
+      "type": "string"
+    },
+    "is_deleted": {
+      "type": "boolean",
+      "default": false
+    }
+  },
+  "required": [
+    "code",
+    "statement"
+  ]
+}
