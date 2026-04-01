@@ -1,0 +1,82 @@
+{
+  "name": "SDSSection",
+  "type": "object",
+  "description": "TextBySection table \u2014 full SDS content split into sections by file_sha256",
+  "properties": {
+    "tenant_id": {
+      "type": "string"
+    },
+    "file_sha256": {
+      "type": "string",
+      "description": "Foreign key to Keys/ProductMaster"
+    },
+    "section_number": {
+      "type": "number",
+      "description": "SDS section 1\u201316"
+    },
+    "text": {
+      "type": "string",
+      "description": "Full section text content"
+    },
+    "abstained": {
+      "type": "boolean",
+      "description": "True if extraction abstained or failed"
+    },
+    "reason": {
+      "type": "string",
+      "description": "Reason for abstention if applicable"
+    },
+    "is_core": {
+      "type": "boolean",
+      "default": false,
+      "description": "True if sections 4,5,6,7 (always offline). False if on-demand sections 1,2,3,8-16."
+    }
+  },
+  "required": [
+    "file_sha256",
+    "tenant_id"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "data.tenant_id": "{{user.tenant_id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "create": {
+      "$or": [
+        {
+          "data.tenant_id": "{{user.tenant_id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "data.tenant_id": "{{user.tenant_id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

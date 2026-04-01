@@ -1,0 +1,45 @@
+{
+  "name": "User",
+  "type": "object",
+  "properties": {
+    "role": {
+      "type": "string",
+      "enum": [
+        "admin",
+        "user"
+      ],
+      "default": "user",
+      "description": "Platform role: admin = App Super Admin, user = tenant-scoped user"
+    },
+    "tenant_id": {
+      "type": "string",
+      "description": "The tenant (Site_Parent) this user belongs to"
+    },
+    "hazmat_role": {
+      "type": "string",
+      "enum": [
+        "app_super_admin",
+        "site_admin",
+        "site_user",
+        "site_security"
+      ],
+      "default": "site_user",
+      "description": "HazMat R2K application role"
+    },
+    "primary_site_id": {
+      "type": "string",
+      "description": "Primary site assignment"
+    },
+    "allowed_site_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Sites this user can access. Empty = all sites in tenant (for site_admin)."
+    },
+    "is_active": {
+      "type": "boolean",
+      "default": true
+    }
+  }
+}

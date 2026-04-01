@@ -1,0 +1,70 @@
+{
+  "name": "SyncState",
+  "type": "object",
+  "description": "Tracks sync state machine for each tenant+step to enable safe retries",
+  "properties": {
+    "sync_key": {
+      "type": "string",
+      "description": "Unique key: tenant:<site_parent>:<step> or global:<step>"
+    },
+    "tenant_id": {
+      "type": "string",
+      "description": "Tenant context (null for global lookups)"
+    },
+    "step": {
+      "type": "string",
+      "description": "Sync step name (registry, productMaster, composition, etc)"
+    },
+    "requested_mode": {
+      "type": "string",
+      "enum": [
+        "full",
+        "incremental"
+      ],
+      "description": "Requested sync mode (full or incremental) - persisted intent"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "in_progress",
+        "success",
+        "error"
+      ],
+      "description": "Current operation status"
+    },
+    "purge_started_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When purge operation started"
+    },
+    "purge_completed_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When purge operation completed"
+    },
+    "watermark_timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Last successful sync watermark (used for incremental syncs)"
+    },
+    "last_error": {
+      "type": "string",
+      "description": "Last error message if sync failed"
+    },
+    "last_error_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the last error occurred"
+    },
+    "completed_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the sync successfully completed"
+    }
+  },
+  "required": [
+    "sync_key",
+    "status",
+    "requested_mode"
+  ]
+}

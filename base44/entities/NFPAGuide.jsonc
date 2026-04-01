@@ -1,0 +1,27 @@
+{
+  "name": "NFPAGuide",
+  "type": "object",
+  "description": "NFPA classification descriptions \u2014 grouped by hazard class",
+  "properties": {
+    "class": {
+      "type": "string",
+      "description": "NFPA Class grouping (e.g. FLAMMABILITY, HEALTH)"
+    },
+    "level": {
+      "type": "string",
+      "description": "NFPA level 0-4"
+    },
+    "rule": {
+      "type": "string",
+      "description": "Classification rule / description"
+    },
+    "is_deleted": {
+      "type": "boolean",
+      "default": false
+    }
+  },
+  "required": [
+    "class",
+    "rule"
+  ]
+}

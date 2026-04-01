@@ -1,0 +1,21 @@
+{
+  "name": "GHSPrecautionaryStatement",
+  "type": "object",
+  "properties": {
+    "code": {
+      "type": "string",
+      "description": "GHS_Precautionary_Statement_Code"
+    },
+    "description": {
+      "type": "string",
+      "description": "GHS_Precautionary_Comb_Text"
+    },
+    "is_deleted": {
+      "type": "boolean",
+      "default": false
+    }
+  },
+  "required": [
+    "code"
+  ]
+}

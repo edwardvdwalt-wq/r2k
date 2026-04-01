@@ -1,0 +1,26 @@
+{
+  "name": "GHSPictogram",
+  "type": "object",
+  "description": "GHS Identification Label Codes \u2014 pictogram reference table",
+  "properties": {
+    "description": {
+      "type": "string",
+      "description": "GHS_Label_Desc"
+    },
+    "hint_text": {
+      "type": "string",
+      "description": "Hint_Text tooltip"
+    },
+    "pictogram_img": {
+      "type": "string",
+      "description": "GHS_Label_IMG URL"
+    },
+    "is_deleted": {
+      "type": "boolean",
+      "default": false
+    }
+  },
+  "required": [
+    "description"
+  ]
+}
